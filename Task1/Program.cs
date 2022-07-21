@@ -5,7 +5,7 @@
 
 namespace Seminar9
 {
-    class Task1
+    class Task2
     {
         static void Main(string[] args)
         {
@@ -15,9 +15,11 @@ namespace Seminar9
             FillArray(array);
             Console.WriteLine($"Начальный массив:  ");
             PrintArray(array);
-            Console.WriteLine("Перевернутый массив: ");
-            ReplacLine(array);
-            PrintArray(array);
+            // Console.WriteLine();
+            Console.WriteLine($"Индексы минимальногшо числа в массиве: {GetMinIndex(array)[0]} {GetMinIndex(array)[1]}");
+            Console.WriteLine();
+            Console.WriteLine($"Массив без строки и столбца: {GetMinIndex(array)[0] +1} {GetMinIndex(array)[1] +1}");
+            PrintArray(DeleteColStr(array, GetMinIndex(array)));
         }
         static void FillArray(int[,] array)
         {
@@ -29,20 +31,39 @@ namespace Seminar9
                 }
             }
         }
-        static void ReplacLine(int[,] array)
+        public static int[] GetMinIndex(int[,] array)
         {
-            int lineEnd = array.GetLength(0) - 1;
-            for (int i = 0; i < 1; i++)
+            int[] minIndex = new int[2];
+            int minI = 0;
+            int minJ = 0;
+            for (int i = 0; i < array.GetLength(0); i++)
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    int number = array[i, j];
-                    array[i, j] = array[lineEnd, j];
-                    array[lineEnd, j] = number;
+                    if(array[i,j] < array[minI,minJ]) 
+                    {
+                        minI = i;
+                        minJ = j;
+                        minIndex[0] = i;
+                        minIndex[1] = j;
+                    }
                 }
-
             }
-
+            return minIndex;
+        }
+        static int[,] DeleteColStr(int[,] array, int[] minIndex)
+        {
+            int[,] number = new int[array.GetLength(0) - 1, array.GetLength(1) - 1];
+            for (int i = 0, m = 0; i < array.GetLength(0) && m < number.GetLength(0); i++, m++)
+            {
+                if(i == minIndex[0] ) i++;
+                for (int j = 0, n = 0; j < array.GetLength(1) && n < number.GetLength(1); j++, n++)
+                {
+                    if(j == minIndex[1]) j++;
+                    number[m,n] = array[i,j];
+                }
+            }
+            return number;
         }
         static void PrintArray(int[,] array)
         {
