@@ -30,10 +30,10 @@ namespace Seminar9
             FillArray(array);
             Console.WriteLine($"Начальный массив:  ");
             PrintArray(array);
+            // Console.WriteLine();
+            Console.WriteLine($"Индексы минимальногшо числа в массиве: {GetMinIndex(array)[0]} {GetMinIndex(array)[1]}");
             Console.WriteLine();
-            Console.WriteLine($"{GetMinIndex(array)[0]} {GetMinIndex(array)[1]}");
-
-            Console.WriteLine("Перевернутый массив: ");
+            Console.WriteLine($"Массив без строки и столбца: {GetMinIndex(array)[0] +1} {GetMinIndex(array)[1] +1}");
             PrintArray(DeleteColStr(array, GetMinIndex(array)));
         }
         static void FillArray(int[,] array)
