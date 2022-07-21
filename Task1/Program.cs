@@ -11,15 +11,14 @@ namespace Seminar9
         {
             int n = new Random().Next(3, 7);
             int m = new Random().Next(3, 7);
-            int[,] array = new int[m, n];
+            int[,] array = new int[n, m];
             FillArray(array);
-            Console.WriteLine($"Начальный массив:  ");
+            Console.WriteLine("Начальный Массив");
             PrintArray(array);
-            // Console.WriteLine();
-            Console.WriteLine($"Индексы минимальногшо числа в массиве: {GetMinIndex(array)[0]} {GetMinIndex(array)[1]}");
-            Console.WriteLine();
-            Console.WriteLine($"Массив без строки и столбца: {GetMinIndex(array)[0] +1} {GetMinIndex(array)[1] +1}");
-            PrintArray(DeleteColStr(array, GetMinIndex(array)));
+            SquareEvenIndex(array);
+             Console.WriteLine("Массив после выполнения программы");
+            PrintArray(array);
+
         }
         static void FillArray(int[,] array)
         {
@@ -31,40 +30,6 @@ namespace Seminar9
                 }
             }
         }
-        public static int[] GetMinIndex(int[,] array)
-        {
-            int[] minIndex = new int[2];
-            int minI = 0;
-            int minJ = 0;
-            for (int i = 0; i < array.GetLength(0); i++)
-            {
-                for (int j = 0; j < array.GetLength(1); j++)
-                {
-                    if(array[i,j] < array[minI,minJ]) 
-                    {
-                        minI = i;
-                        minJ = j;
-                        minIndex[0] = i;
-                        minIndex[1] = j;
-                    }
-                }
-            }
-            return minIndex;
-        }
-        static int[,] DeleteColStr(int[,] array, int[] minIndex)
-        {
-            int[,] number = new int[array.GetLength(0) - 1, array.GetLength(1) - 1];
-            for (int i = 0, m = 0; i < array.GetLength(0) && m < number.GetLength(0); i++, m++)
-            {
-                if(i == minIndex[0] ) i++;
-                for (int j = 0, n = 0; j < array.GetLength(1) && n < number.GetLength(1); j++, n++)
-                {
-                    if(j == minIndex[1]) j++;
-                    number[m,n] = array[i,j];
-                }
-            }
-            return number;
-        }
         static void PrintArray(int[,] array)
         {
             for (int i = 0; i < array.GetLength(0); i++)
@@ -74,6 +39,17 @@ namespace Seminar9
                     Console.Write(array[i, j] + " ");
                 }
                 Console.WriteLine();
+            }
+        }
+        static void SquareEvenIndex(int[,] array)
+        {
+
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (i % 2 == 0 && j % 2 == 0) array[i, j] = array[i, j] * array[i, j];
+                }
             }
         }
     }
